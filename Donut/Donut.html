@@ -65,9 +65,22 @@ require([ 'threex.donut/package.require.js'
 	var destroyWhenFire = 0.11;
 	var destroyWhenSpace = 0.2;
 	var qtdMoon = 1;
-	var moonMesh =  new Array(qtdMoon);
+	var dificult = 1;
+	var moonMesh =  new Array();
 	//var moonMeshTwo =  new Array(qtdMoon);
-	
+	function newMoon(){
+		if(qtdMoon < 10 || dificult > 10){
+		    moonMesh[qtdMoon] = THREEx.Planets.createEarth();
+	        scene.add(moonMesh[qtdMoon]);
+			resetMoon(qtdMoon);
+			qtdMoon++;
+		}else{
+			dificult++;
+		}
+		if(dificult > 10){
+			dificult = 1;
+		}
+	}
 	for(l = 0; l < qtdMoon; l++){		
 	  //moonMesh[l] = THREEx.Planets.createSun()
 	  moonMesh[l] = THREEx.Planets.createEarth()
@@ -168,7 +181,7 @@ require([ 'threex.donut/package.require.js'
 					//detonation.position =  shoot[l].position;
 					//scene.add(detonation);
 					playExplosionSound()
-					qtdMoon++;
+					newMoon();
 					break;
 				}
 			}
@@ -212,7 +225,7 @@ require([ 'threex.donut/package.require.js'
 		if( spaceship === null )  return;
 
 		// set the speed
-		var speed = 1;
+		var speed = 2;
 		// only if donut is loaded
 		if( keyboard.pressed('down') ){
 		    spaceship.position.y  -= speed * delta;
@@ -221,9 +234,9 @@ require([ 'threex.donut/package.require.js'
 		}
 		/*adler*/
 		if( keyboard.pressed('left') ){
-		    spaceship.position.x -= (2*speed) * delta;
+		    spaceship.position.x -= (speed) * delta;
 		}else if( keyboard.pressed('right') ){
-		    spaceship.position.x  += (2*speed) * delta;
+		    spaceship.position.x  += (speed) * delta;
 		}
 		if( keyboard.pressed('space') ){
 		}
@@ -246,6 +259,12 @@ require([ 'threex.donut/package.require.js'
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
 		camera.lookAt( scene.position )
 	})*/
+	var mouse	= {x : 0, y : 0}
+	document.addEventListener('click', function(event){
+		camera.position.z = 1;
+
+		camera.lookAt( scene.position )
+	}, false)
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the scene						//
