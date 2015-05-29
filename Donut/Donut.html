@@ -62,7 +62,8 @@ require([ 'threex.donut/package.require.js'
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add a moon							//
 	//////////////////////////////////////////////////////////////////////////////////
-	var qtdMoon = 3;
+	var destroyWhen = -0.3;
+	var qtdMoon = 10;
 	var moonMesh =  new Array(qtdMoon);
 	//var moonMeshTwo =  new Array(qtdMoon);
 	
@@ -97,7 +98,7 @@ require([ 'threex.donut/package.require.js'
 				if( spaceship === null )    return
 				// compute distance between spaceship and the moon
 				var distance = moonMesh[l].position.distanceTo(spaceship.position)
-				if( distance < 0.3 ){
+				if( distance < destroyWhen ){
 					resetMoon(l)
 					playExplosionSound()
 				}
@@ -160,7 +161,7 @@ require([ 'threex.donut/package.require.js'
 			shoot[l].position.x += 4 * delta;
 			for(li = 0; li < qtdMoon; li++){
 				var distance = moonMesh[li].position.distanceTo(shoot[l].position)
-				if( distance < 0.3 ){
+				if( distance < destroyWhen ){
 					resetMoon(li)
 					resetShoot(l)
 					//detonation.position =  shoot[l].position;
