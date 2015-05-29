@@ -7,13 +7,13 @@ THREEx.Planets.baseURL	= '../'
 
 
 THREEx.Planets.createEarth	= function(){
-	var geometry	= new THREE.SphereGeometry(0.12, 32, 32)
+	var geometry	= new THREE.SphereGeometry(0.1, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
 		map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthmap1k.jpg'),
 		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthbump1k.jpg'),
-		bumpScale	: 0.03,
+		bumpScale	: 0.05,
 		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthspec1k.jpg'),
-		specular	: new THREE.Color('black'),
+		specular	: new THREE.Color('grey'),
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh	
