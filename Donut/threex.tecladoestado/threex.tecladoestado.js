@@ -1,4 +1,4 @@
-// THREEx.KeyboardState.js keep the current state of the keyboard.
+// THREEx.TecladoEstado.js keep the current state of the teclado.
 // It is possible to query it at any time. No need of an event.
 // This is particularly convenient in loop driven case, like in
 // 3D demos or games.
@@ -7,20 +7,20 @@
 //
 // **Step 1**: Create the object
 //
-// ```var keyboard	= new THREEx.KeyboardState();```
+// ```var teclado	= new THREEx.TecladoEstado();```
 //
-// **Step 2**: Query the keyboard state
+// **Step 2**: Query the teclado state
 //
 // This will return true if shift and A are pressed, false otherwise
 //
-// ```keyboard.pressed("shift+A")```
+// ```teclado.pressed("shift+A")```
 //
-// **Step 3**: Stop listening to the keyboard
+// **Step 3**: Stop listening to the teclado
 //
-// ```keyboard.destroy()```
+// ```teclado.destroy()```
 //
 // NOTE: this library may be nice as standaline. independant from three.js
-// - rename it keyboardForGame
+// - rename it tecladoForGame
 //
 // # Code
 //
@@ -34,14 +34,14 @@ var THREEx	= THREEx 		|| {};
  *   - in this._onkeyChange, generate a string from the DOM event
  *   - use this as event name
 */
-THREEx.KeyboardState	= function(domElement)
+THREEx.TecladoEstado	= function(domElement)
 {
 	this.domElement= domElement	|| document;
 	// to store the current state
 	this.keyCodes	= {};
 	this.modifiers	= {};
 	
-	// create callback to bind/unbind keyboard events
+	// create callback to bind/unbind teclado events
 	var _this	= this;
 	this._onKeyDown	= function(event){ _this._onKeyChange(event)	}
 	this._onKeyUp	= function(event){ _this._onKeyChange(event)	}
@@ -52,17 +52,17 @@ THREEx.KeyboardState	= function(domElement)
 }
 
 /**
- * To stop listening of the keyboard events
+ * To stop listening of the teclado events
 */
-THREEx.KeyboardState.prototype.destroy	= function()
+THREEx.TecladoEstado.prototype.destroy	= function()
 {
 	// unbind keyEvents
 	this.domElement.removeEventListener("keydown", this._onKeyDown, false);
 	this.domElement.removeEventListener("keyup", this._onKeyUp, false);
 }
 
-THREEx.KeyboardState.MODIFIERS	= ['shift', 'ctrl', 'alt', 'meta'];
-THREEx.KeyboardState.ALIAS	= {
+THREEx.TecladoEstado.MODIFIERS	= ['shift', 'ctrl', 'alt', 'meta'];
+THREEx.TecladoEstado.ALIAS	= {
 	'left'		: 37,
 	'up'		: 38,
 	'right'		: 39,
@@ -75,9 +75,9 @@ THREEx.KeyboardState.ALIAS	= {
 };
 
 /**
- * to process the keyboard dom event
+ * to process the teclado dom event
 */
-THREEx.KeyboardState.prototype._onKeyChange	= function(event)
+THREEx.TecladoEstado.prototype._onKeyChange	= function(event)
 {
 	// log to debug
 	//console.log("onKeyChange", event, event.keyCode, event.shiftKey, event.ctrlKey, event.altKey, event.metaKey)
@@ -94,20 +94,20 @@ THREEx.KeyboardState.prototype._onKeyChange	= function(event)
 }
 
 /**
- * query keyboard state to know if a key is pressed of not
+ * query teclado state to know if a key is pressed of not
  *
  * @param {String} keyDesc the description of the key. format : modifiers+key e.g shift+A
  * @returns {Boolean} true if the key is pressed, false otherwise
 */
-THREEx.KeyboardState.prototype.pressed	= function(keyDesc){
+THREEx.TecladoEstado.prototype.pressed	= function(keyDesc){
 	var keys	= keyDesc.split("+");
 	for(var i = 0; i < keys.length; i++){
 		var key		= keys[i]
 		var pressed	= false
-		if( THREEx.KeyboardState.MODIFIERS.indexOf( key ) !== -1 ){
+		if( THREEx.TecladoEstado.MODIFIERS.indexOf( key ) !== -1 ){
 			pressed	= this.modifiers[key];
-		}else if( Object.keys(THREEx.KeyboardState.ALIAS).indexOf( key ) != -1 ){
-			pressed	= this.keyCodes[ THREEx.KeyboardState.ALIAS[key] ];
+		}else if( Object.keys(THREEx.TecladoEstado.ALIAS).indexOf( key ) != -1 ){
+			pressed	= this.keyCodes[ THREEx.TecladoEstado.ALIAS[key] ];
 		}else {
 			pressed	= this.keyCodes[key.toUpperCase().charCodeAt(0)]
 		}
@@ -118,12 +118,12 @@ THREEx.KeyboardState.prototype.pressed	= function(keyDesc){
 
 /**
  * return true if an event match a keyDesc
- * @param  {KeyboardEvent} event   keyboard event
+ * @param  {TecladoEvent} event   teclado event
  * @param  {String} keyDesc string description of the key
  * @return {Boolean}         true if the event match keyDesc, false otherwise
  */
-THREEx.KeyboardState.prototype.eventMatches = function(event, keyDesc) {
-	var aliases	= THREEx.KeyboardState.ALIAS
+THREEx.TecladoEstado.prototype.eventMatches = function(event, keyDesc) {
+	var aliases	= THREEx.TecladoEstado.ALIAS
 	var aliasKeys	= Object.keys(aliases)
 	var keys	= keyDesc.split("+")
 	// log to debug

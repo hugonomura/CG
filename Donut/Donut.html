@@ -7,7 +7,7 @@
 require([ 'threex.donut/package.require.js'
 	, 'vendor/three.js/examples/js/loaders/OBJMTLLoader.js'
 	, 'vendor/three.js/examples/js/loaders/MTLLoader.js'
-	, 'threex.keyboardstate/package.require.js'
+	, 'threex.tecladoestado/package.require.js'
 	, 'threex.nescau/package.require.js'
 	, 'webaudiox/build/webaudiox.js'
 	], function(){
@@ -199,15 +199,15 @@ require([ 'threex.donut/package.require.js'
 	/*adler*/
 	
 	//////////////////////////////////////////////////////////////////////////////////
-	//		controls by keyboard						//
+	//		controls by teclado						//
 	//////////////////////////////////////////////////////////////////////////////////
 	
-	// create keyboard instance
-	var keyboard  = new THREEx.KeyboardState();
+	// create teclado instance
+	var teclado  = new THREEx.TecladoEstado();
 	// only on keydown + no repeat
 	var wasPressed	= {};
-	keyboard.domElement.addEventListener('keydown', function(event){
-		if( keyboard.eventMatches(event, 'space') && !wasPressed['space'] ){
+	teclado.domElement.addEventListener('keydown', function(event){
+		if( teclado.eventMatches(event, 'space') && !wasPressed['space'] ){
 			wasPressed['space']	= true;
 			shoot[qtdShoot] = new THREEx.Donut.Shoot();
 			shoot[qtdShoot].position.x= spaceship.position.x + 0.3;
@@ -218,8 +218,8 @@ require([ 'threex.donut/package.require.js'
 		}
 	})	
 	// listen on keyup to maintain ```wasPressed``` array
-	keyboard.domElement.addEventListener('keyup', function(event){
-		if( keyboard.eventMatches(event, 'space') ){
+	teclado.domElement.addEventListener('keyup', function(event){
+		if( teclado.eventMatches(event, 'space') ){
 			wasPressed['space']	= false;
 		}
 	})
@@ -232,18 +232,18 @@ require([ 'threex.donut/package.require.js'
 		// set the speed
 		var speed = 2;
 		// only if donut is loaded
-		if( keyboard.pressed('down') ){
+		if( teclado.pressed('down') ){
 			if(spaceship.position.y > -1.1) spaceship.position.y  -= speed * delta;
-		}else if( keyboard.pressed('up') ){
+		}else if( teclado.pressed('up') ){
 			if(spaceship.position.y < 1.3) spaceship.position.y  += speed * delta;
 		}
 		/*adler*/
-		if( keyboard.pressed('left') ){
+		if( teclado.pressed('left') ){
 			if(spaceship.position.x > -2.6) spaceship.position.x -= (speed) * delta;
-		}else if( keyboard.pressed('right') ){
+		}else if( teclado.pressed('right') ){
    			if(spaceship.position.x < 2)   spaceship.position.x  += (speed) * delta;
 		}
-		if( keyboard.pressed('space') ){
+		if( teclado.pressed('space') ){
 		}
 		/*adler*/
 	})
