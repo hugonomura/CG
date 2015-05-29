@@ -71,6 +71,23 @@ function color(){
 	var c = ['0xff0084','0xff0084','0x00ffea', '0x8a00ff'];//'0x8aff00'
 	return c[Math.floor((Math.random() * 3) + 1)];
 }
+
+
+THREEx.Donut.LineLimit	= function(){
+	var geometry = new THREE.CylinderGeometry( 0.015, 0.001, 2, 8);
+	var material	= new THREE.MeshPhongMaterial({
+		side		: THREE.DoubleSide,
+		blending	: THREE.AdditiveBlending,
+		opacity		: 2,
+		depthWrite	: false,
+		transparent	: true,
+		color		: 0x0506d5,
+		specular	: new THREE.Color('blue')
+	})
+	var mesh = new THREE.Mesh(geometry, material);
+
+	return mesh	
+}
 /**
  * create a detonation effect. 
  */

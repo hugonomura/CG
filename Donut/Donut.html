@@ -161,6 +161,11 @@ require([ 'threex.donut/package.require.js'
 		spaceship.rotateY(-2 * delta);
 	});
 	/*adler*/
+	/*limitShoot*/
+	var limitShoot = new THREEx.Donut.LineLimit();
+    limitShoot.position.x = 3
+    scene.add(limitShoot)
+	/*limitShoot*/
 	var shoot = [];
 	var qtdShoot = 0; //conta a quantidade de tiros
 	//var detonation	= new THREEx.Donut.Detonation();
@@ -228,15 +233,15 @@ require([ 'threex.donut/package.require.js'
 		var speed = 2;
 		// only if donut is loaded
 		if( keyboard.pressed('down') ){
-		    spaceship.position.y  -= speed * delta;
+			if(spaceship.position.y > -1.1) spaceship.position.y  -= speed * delta;
 		}else if( keyboard.pressed('up') ){
-		    spaceship.position.y  += speed * delta;
+			if(spaceship.position.y < 1.3) spaceship.position.y  += speed * delta;
 		}
 		/*adler*/
 		if( keyboard.pressed('left') ){
-		    spaceship.position.x -= (speed) * delta;
+			if(spaceship.position.x > -2.6) spaceship.position.x -= (speed) * delta;
 		}else if( keyboard.pressed('right') ){
-		    spaceship.position.x  += (speed) * delta;
+   			if(spaceship.position.x < 2)   spaceship.position.x  += (speed) * delta;
 		}
 		if( keyboard.pressed('space') ){
 		}
@@ -260,11 +265,15 @@ require([ 'threex.donut/package.require.js'
 		camera.lookAt( scene.position )
 	})*/
 	var mouse	= {x : 0, y : 0}
-	document.addEventListener('click', function(event){
-		camera.position.z = 1;
-
-		camera.lookAt( scene.position )
+	document.addEventListener('mousemove', function(event){
+		mouse.x	= (event.clientX / window.innerWidth ) - 0.5
+		//mouse.y	= (event.clientY / window.innerHeight) - 0.5
 	}, false)
+	onRenderFcts.push(function(delta, now){
+		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+		//camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
+		camera.lookAt( scene.position )
+	})
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the scene						//
