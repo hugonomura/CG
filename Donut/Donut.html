@@ -62,8 +62,9 @@ require([ 'threex.donut/package.require.js'
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add a moon							//
 	//////////////////////////////////////////////////////////////////////////////////
-	var destroyWhen = -0.3;
-	var qtdMoon = 10;
+	var destroyWhenFire = 0.11;
+	var destroyWhenSpace = 0.2;
+	var qtdMoon = 1;
 	var moonMesh =  new Array(qtdMoon);
 	//var moonMeshTwo =  new Array(qtdMoon);
 	
@@ -98,7 +99,7 @@ require([ 'threex.donut/package.require.js'
 				if( spaceship === null )    return
 				// compute distance between spaceship and the moon
 				var distance = moonMesh[l].position.distanceTo(spaceship.position)
-				if( distance < destroyWhen ){
+				if( distance < destroyWhenSpace ){
 					resetMoon(l)
 					playExplosionSound()
 				}
@@ -161,12 +162,13 @@ require([ 'threex.donut/package.require.js'
 			shoot[l].position.x += 4 * delta;
 			for(li = 0; li < qtdMoon; li++){
 				var distance = moonMesh[li].position.distanceTo(shoot[l].position)
-				if( distance < destroyWhen ){
+				if( distance < destroyWhenFire ){
 					resetMoon(li)
 					resetShoot(l)
 					//detonation.position =  shoot[l].position;
 					//scene.add(detonation);
 					playExplosionSound()
+					qtdMoon++;
 					break;
 				}
 			}
@@ -234,7 +236,7 @@ require([ 'threex.donut/package.require.js'
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Camera Controls							//
 	//////////////////////////////////////////////////////////////////////////////////
-	var mouse	= {x : 0, y : 0}
+	/*var mouse	= {x : 0, y : 0}
 	document.addEventListener('mousemove', function(event){
 		mouse.x	= (event.clientX / window.innerWidth ) - 0.5
 		mouse.y	= (event.clientY / window.innerHeight) - 0.5
@@ -243,7 +245,7 @@ require([ 'threex.donut/package.require.js'
 		camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
 		camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
 		camera.lookAt( scene.position )
-	})
+	})*/
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the scene						//
