@@ -43,10 +43,10 @@ thetaLength — The central angle, often called theta, of the circular sector. T
 	//geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 1 / 2, 0 ) );
 	geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI / 2 ) );
 	var material	= new THREE.MeshPhongMaterial({
-/*		map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthmap1k.jpg'),
-		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthbump1k.jpg'),
+/*		map		: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolamap1k.jpg'),
+		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolabump1k.jpg'),
 		bumpScale	: 0.05,
-		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthspec1k.jpg'),*/
+		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolaspec1k.jpg'),*/
 		color		: color() * 0xffffff,
 		specular	: new THREE.Color('black')
 	})

@@ -1,36 +1,36 @@
 var THREEx = THREEx || {}
 
-THREEx.Planets	= {}
+THREEx.Nescau	= {}
 
-THREEx.Planets.baseURL	= '../'
+THREEx.Nescau.baseURL	= '../'
 
 
 
-THREEx.Planets.createEarth	= function(){
+THREEx.Nescau.createBola	= function(){
 	var geometry	= new THREE.SphereGeometry(0.12, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
-		map		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthmap1k.jpg'),
-		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthbump1k.jpg'),
+		map		: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolamap1k.jpg'),
+		bumpMap		: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolabump1k.jpg'),
 		bumpScale	: 0.03,
-		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/earthspec1k.jpg'),
+		specularMap	: THREE.ImageUtils.loadTexture(THREEx.Nescau.baseURL+'images/bolaspec1k.jpg'),
 		specular	: new THREE.Color('black'),
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh	
 }
 
-THREEx.Planets.createEarthCloud	= function(){
+THREEx.Nescau.createBolaCloud	= function(){
 	// create destination canvas
 	var canvasResult	= document.createElement('canvas')
 	canvasResult.width	= 1024
 	canvasResult.height	= 512
 	var contextResult	= canvasResult.getContext('2d')		
 
-	// load earthcloudmap
+	// load bolacloudmap
 	var imageMap	= new Image();
 	imageMap.addEventListener("load", function() {
 		
-		// create dataMap ImageData for earthcloudmap
+		// create dataMap ImageData for bolacloudmap
 		var canvasMap	= document.createElement('canvas')
 		canvasMap.width	= imageMap.width
 		canvasMap.height= imageMap.height
@@ -38,10 +38,10 @@ THREEx.Planets.createEarthCloud	= function(){
 		contextMap.drawImage(imageMap, 0, 0)
 		var dataMap	= contextMap.getImageData(0, 0, canvasMap.width, canvasMap.height)
 
-		// load earthcloudmaptrans
+		// load bolacloudmaptrans
 		var imageTrans	= new Image();
 		imageTrans.addEventListener("load", function(){
-			// create dataTrans ImageData for earthcloudmaptrans
+			// create dataTrans ImageData for bolacloudmaptrans
 			var canvasTrans		= document.createElement('canvas')
 			canvasTrans.width	= imageTrans.width
 			canvasTrans.height	= imageTrans.height
@@ -62,9 +62,9 @@ THREEx.Planets.createEarthCloud	= function(){
 			contextResult.putImageData(dataResult,0,0)	
 			material.map.needsUpdate = true;
 		})
-		imageTrans.src	= THREEx.Planets.baseURL+'images/earthcloudmaptrans.jpg';
+		imageTrans.src	= THREEx.Nescau.baseURL+'images/bolacloudmaptrans.jpg';
 	}, false);
-	imageMap.src	= THREEx.Planets.baseURL+'images/earthcloudmap.jpg';
+	imageMap.src	= THREEx.Nescau.baseURL+'images/bolacloudmap.jpg';
 
 	var geometry	= new THREE.SphereGeometry(0.51, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
@@ -80,7 +80,7 @@ THREEx.Planets.createEarthCloud	= function(){
 
 
 
-THREEx.Planets._RingGeometry = function ( innerRadius, outerRadius, thetaSegments ) {
+THREEx.Nescau._RingGeometry = function ( innerRadius, outerRadius, thetaSegments ) {
 
 	THREE.Geometry.call( this )
 
@@ -142,6 +142,6 @@ THREEx.Planets._RingGeometry = function ( innerRadius, outerRadius, thetaSegment
 	this.boundingSphere = new THREE.Sphere( new THREE.Vector3(), outerRadius );
 
 };
-THREEx.Planets._RingGeometry.prototype = Object.create( THREE.Geometry.prototype );
+THREEx.Nescau._RingGeometry.prototype = Object.create( THREE.Geometry.prototype );
 
 

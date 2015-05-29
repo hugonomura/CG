@@ -8,7 +8,7 @@ require([ 'threex.donut/package.require.js'
 	, 'vendor/three.js/examples/js/loaders/OBJMTLLoader.js'
 	, 'vendor/three.js/examples/js/loaders/MTLLoader.js'
 	, 'threex.keyboardstate/package.require.js'
-	, 'threex.planets/package.require.js'
+	, 'threex.nescau/package.require.js'
 	, 'webaudiox/build/webaudiox.js'
 	], function(){
 	// detect WebGL
@@ -70,7 +70,7 @@ require([ 'threex.donut/package.require.js'
 	//var moonMeshTwo =  new Array(qtdMoon);
 	function newMoon(){
 		if(qtdMoon < 10 || dificult > 10){
-		    moonMesh[qtdMoon] = THREEx.Planets.createEarth();
+		    moonMesh[qtdMoon] = THREEx.Nescau.createBola();
 	        scene.add(moonMesh[qtdMoon]);
 			resetMoon(qtdMoon);
 			qtdMoon++;
@@ -82,10 +82,10 @@ require([ 'threex.donut/package.require.js'
 		}
 	}
 	for(l = 0; l < qtdMoon; l++){		
-	  //moonMesh[l] = THREEx.Planets.createSun()
-	  moonMesh[l] = THREEx.Planets.createEarth()
+	  //moonMesh[l] = THREEx.Nescau.createSun()
+	  moonMesh[l] = THREEx.Nescau.createBola()
       scene.add(moonMesh[l])
-	  //moonMeshTwo[l] = THREEx.Planets.createEarthCloud()
+	  //moonMeshTwo[l] = THREEx.Nescau.createBolaCloud()
 	  //scene.add(moonMeshTwo[l])
 	  resetMoon[l];
 	}
